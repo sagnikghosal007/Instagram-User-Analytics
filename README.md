@@ -32,7 +32,9 @@ ORDER BY created_at
 LIMIT 5;
 ```
 Output:
-![image](https://github.com/user-attachments/assets/0edcf37a-a0db-4bcd-91b3-5bf422ad3acd)
+
+
+![image](https://github.com/user-attachments/assets/67ea0ef7-14ce-44a5-9a81-bc906785009c)
 
 
 ---
@@ -47,6 +49,12 @@ LEFT JOIN photos p ON p.user_id = u.id
 WHERE p.image_url IS NULL 
 ORDER BY u.username;
 ```
+
+
+
+Output:
+
+![image](https://github.com/user-attachments/assets/635dab3d-caa3-40db-812a-ead4b11f5eb0)
 
 ---
 
