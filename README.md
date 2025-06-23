@@ -1,10 +1,10 @@
-# 📊 Instagram Clone Database Analysis
+#  Instagram Clone Database Analysis
 
 This project performs analytical SQL queries on an Instagram clone database (`ig_clone`) to extract meaningful insights. It answers specific business-oriented questions such as identifying active users, engagement levels, hashtag popularity, and user registration behavior.
 
 ---
 
-## 📁 Database Tables Used
+## Database Tables Used
 
 - `users`: Contains user information.
 - `photos`: Stores photo uploads by users.
@@ -20,9 +20,9 @@ This project performs analytical SQL queries on an Instagram clone database (`ig
 
 ---
 
-## 🔍 SQL Queries & Insights
+##  SQL Queries & Insights
 
-### 1. 🧓 Oldest Users on Instagram
+### 1.  Oldest Users on Instagram
 **Objective:** Identify the five oldest users based on their account creation date.
 
 ```sql
@@ -39,7 +39,7 @@ Output:
 
 ---
 
-### 2. 📭 Users Who Have Never Posted a Photo
+### 2.  Users Who Have Never Posted a Photo
 **Objective:** List all users who have not uploaded a single photo.
 
 ```sql
@@ -47,7 +47,7 @@ SELECT u.username
 FROM users u 
 LEFT JOIN photos
 ON photos.user_id = users.id 
-WHERE photos.image_url IS NULL ;
+WHERE photos.id IS NULL ;
 ```
 
 
@@ -59,7 +59,7 @@ Output:
 
 ---
 
-### 3. 🏆 Contest Winner (Most Liked Photo)
+### 3.  Contest Winner (Most Liked Photo)
 **Objective:** Determine the photo with the highest number of likes and retrieve its owner's username.
 
 ```sql
@@ -74,6 +74,9 @@ GROUP BY photos.id
 ORDER BY total DESC 
 LIMIT 1;
 ```
+
+![image](https://github.com/user-attachments/assets/fe14c126-9a33-44d0-b442-3cf415a59f06)
+
 
 ---
 
