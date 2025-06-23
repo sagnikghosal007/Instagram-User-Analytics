@@ -45,8 +45,9 @@ Output:
 ```sql
 SELECT u.username 
 FROM users u 
-LEFT JOIN photos p ON p.user_id = u.id 
-WHERE p.image_url IS NULL 
+LEFT JOIN photos
+ON photos.user_id = users.id 
+WHERE photos.id IS NULL 
 ORDER BY u.username;
 ```
 
@@ -62,12 +63,15 @@ Output:
 **Objective:** Determine the photo with the highest number of likes and retrieve its owner's username.
 
 ```sql
-SELECT p.id AS photo_id, u.username, COUNT(l.user_id) AS number_of_likes 
-FROM likes l
-INNER JOIN photos p ON l.photo_id = p.id
-INNER JOIN users u ON p.user_id = u.id
-GROUP BY p.id, u.username 
-ORDER BY number_of_likes DESC 
+SELECT username,photos.id,photos.image_url
+COUNT(*) AS total
+FROM photos
+INNER JOIN likes
+ON likes.photo_id=photos.id
+INNER JOIN users
+ON photos.user_id=users_id
+GROUP BY photos.id
+ORDER BY total DESC 
 LIMIT 1;
 ```
 
@@ -77,13 +81,16 @@ LIMIT 1;
 **Objective:** Identify the five most frequently used hashtags.
 
 ```sql
-SELECT t.name_of_tag, COUNT(p.photo_id) AS usage_count 
+SELECT t.name_of_tag as tag_name, COUNT(*) AS total 
 FROM photo_tags p 
 INNER JOIN tags t ON t.id = p.tag_id 
 GROUP BY t.name_of_tag 
-ORDER BY usage_count DESC 
+ORDER BY total DESC 
 LIMIT 5;
 ```
+
+![image](https://github.com/user-attachments/assets/cbb8d62d-feb7-4c69-b64b-d5d91aac418c)
+
 
 ---
 
@@ -91,11 +98,13 @@ LIMIT 5;
 **Objective:** Find the day of the week when most users register on Instagram. Useful for planning ad campaigns.
 
 ```sql
-SELECT DATE_FORMAT(created_at, '%W') AS registration_day, COUNT(*) AS num_of_users 
+SELECT DATE_FORMAT(created_at, '%W') AS dayy, COUNT(*) AS num_of_users 
 FROM users 
-GROUP BY registration_day 
+GROUP BY dayy 
 ORDER BY num_of_users DESC;
 ```
+![image](https://github.com/user-attachments/assets/7fbcf024-18f2-4760-a194-8755770abe02)
+
 
 ---
 
@@ -106,18 +115,12 @@ ORDER BY num_of_users DESC;
 - Average posts per user
 
 ```sql
-WITH base AS (
-  SELECT u.id AS user_id, COUNT(p.id) AS photo_count 
-  FROM users u 
-  LEFT JOIN photos p ON p.user_id = u.id 
-  GROUP BY u.id
-)
-SELECT 
-  SUM(photo_count) AS total_photos, 
-  COUNT(user_id) AS total_users, 
-  ROUND(SUM(photo_count) / COUNT(user_id), 2) AS average_photos_per_user 
-FROM base;
+SELECT (SELECT COUNT(*) FROM photos) / (SELECT COUNT(*) FROM users) AS avg;
+
 ```
+
+![image](https://github.com/user-attachments/assets/fc58f659-096a-46eb-9da6-ae749455d58d)
+
 
 ---
 
