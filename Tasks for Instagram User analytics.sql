@@ -2,11 +2,18 @@ use ig_clone;
 describe users;
 select * from users;
 -- 1.Identify the five oldest users on Instagram from the provided database.
-select username,created_at from users order by created_at limit 5;
+ SELECT username,created_at 
+ FROM  users 
+ ORDER BY  created_at
+ LIMIT 5;
 
 -- 2. Identify users who have never posted a single photo on Instagram
-select * from photos,users;
-select u.username from users u left join photos p on p.user_id=u.id where p.image_url is null order by u.username;
+SELECT u.username 
+FROM users u 
+LEFT JOIN photos
+ON photos.user_id = users.id 
+WHERE photos.id IS NULL 
+ORDER BY u.username;
 
 -- 3.  Determine the winner of the contest and provide their details to the team
 select * from likes, photos,users;
@@ -19,13 +26,9 @@ select t.name_of_tag , count(p.photo_id) as ht from photo_tags p inner join tags
 
 -- 5. Determine the day of the week when most users register on Instagram. Provide insights on when to schedule an ad campaign.
 
-select * from users;
-select DATE_FORMAT((created_at), '%W') as dayy , count(username) as num_0f_users from users group by 1 order by 2 desc;
+SELECT * FROM users;
+SELECT DATE_FORMAT((created_at), '%W') AS dayy , COUNT(username) AS num_of_users FROM users GROUP BY dayy  ORDER BY num_of_users DESC;
 
 
 -- 6. Calculate the average number of posts per user on Instagram. Also, provide the total number of photos on Instagram divided by the total number of users.
-select * from photos,users;
-with base as (
-select u.id as userid,count(p.id) as phtotid from users u left join photos p on p.user_id=u.id group by u.id)
-select sum(photid) as total photos, count(userid) as total_users, sum(photo_id)/count(userid) as photo_per_user 
-from base;
+SELECT (SELECT COUNT(*) FROM photos) / (SELECT COUNT(*) FROM users) AS avg;
