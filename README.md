@@ -47,15 +47,15 @@ SELECT u.username
 FROM users u 
 LEFT JOIN photos
 ON photos.user_id = users.id 
-WHERE photos.id IS NULL 
-ORDER BY u.username;
+WHERE photos.image_url IS NULL ;
 ```
 
 
 
 Output:
 
-![image](https://github.com/user-attachments/assets/635dab3d-caa3-40db-812a-ead4b11f5eb0)
+![image](https://github.com/user-attachments/assets/e42cb949-d962-48d0-a8aa-1810928a2cb2)
+
 
 ---
 
