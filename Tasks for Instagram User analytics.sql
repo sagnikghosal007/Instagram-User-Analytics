@@ -14,10 +14,19 @@ LEFT JOIN photos
 ON photos.user_id = users.id 
 WHERE photos.id IS NULL;
 
--- 3.  Determine the winner of the contest and provide their details to the team
+-- 3.  Determine the winner of the contest and provide their details to the team (Contest Winner - with most no of likes in a photo)
 select * from likes, photos,users;
 
-select likes.photo_id,users.username, count(likes.user_id) as numberoflike from likes inner join photos on likes.photo_id=users.id group by likes.photo_id,users.username order by numberoflike desc ;
+SELECT username,photos.id,photos.image_url
+COUNT(*) AS total
+FROM photos
+INNER JOIN likes
+ON likes.photo_id=photos.id
+INNER JOIN users
+ON photos.user_id=users_id
+GROUP BY photos.id
+ORDER BY total DESC 
+LIMIT 1;
 
 -- 4. Identify and suggest the top five most commonly used hashtags on the platform.
 select * from photo_tags,tags;
