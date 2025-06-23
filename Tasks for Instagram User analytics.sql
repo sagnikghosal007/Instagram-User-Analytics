@@ -12,8 +12,7 @@ SELECT u.username
 FROM users u 
 LEFT JOIN photos
 ON photos.user_id = users.id 
-WHERE photos.id IS NULL 
-ORDER BY u.username;
+WHERE photos.id IS NULL;
 
 -- 3.  Determine the winner of the contest and provide their details to the team
 select * from likes, photos,users;
