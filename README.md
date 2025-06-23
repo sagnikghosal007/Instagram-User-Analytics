@@ -85,9 +85,9 @@ LIMIT 1;
 
 ```sql
 SELECT t.name_of_tag as tag_name, COUNT(*) AS total 
-FROM photo_tags p 
-INNER JOIN tags t ON t.id = p.tag_id 
-GROUP BY t.name_of_tag 
+FROM photo_tags AS p 
+INNER JOIN tags AS t ON t.id = p.tag_id 
+GROUP BY tag_name 
 ORDER BY total DESC 
 LIMIT 5;
 ```
