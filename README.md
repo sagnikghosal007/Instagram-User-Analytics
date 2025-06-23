@@ -31,6 +31,9 @@ FROM users
 ORDER BY created_at 
 LIMIT 5;
 ```
+Output:
+![image](https://github.com/user-attachments/assets/0edcf37a-a0db-4bcd-91b3-5bf422ad3acd)
+
 
 ---
 
