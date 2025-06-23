@@ -29,13 +29,25 @@ ORDER BY total DESC
 LIMIT 1;
 
 -- 4. Identify and suggest the top five most commonly used hashtags on the platform.
-select * from photo_tags,tags;
-select t.name_of_tag , count(p.photo_id) as ht from photo_tags p inner join tags t on t.id=p.tag_id group by t.name_of_tag order by ht desc;
+SELECT * FROM photo_tags,tags;
+
+
+SELECT t.name_of_tag as tag_name, COUNT(*) AS total 
+FROM photo_tags AS p 
+INNER JOIN tags AS t ON t.id = p.tag_id 
+GROUP BY tag_name 
+ORDER BY total DESC 
+LIMIT 5;
 
 -- 5. Determine the day of the week when most users register on Instagram. Provide insights on when to schedule an ad campaign.
 
 SELECT * FROM users;
-SELECT DATE_FORMAT((created_at), '%W') AS dayy , COUNT(username) AS num_of_users FROM users GROUP BY dayy  ORDER BY num_of_users DESC;
+SELECT DATE_FORMAT((created_at), '%W') AS dayy , 
+       COUNT(username) 
+ AS num_of_users 
+ FROM users 
+ GROUP BY dayy  
+ ORDER BY num_of_users DESC;
 
 
 -- 6. Calculate the average number of posts per user on Instagram. Also, provide the total number of photos on Instagram divided by the total number of users.
